@@ -4,7 +4,7 @@ import Posts from './Posts/Posts'
 
 function App() {
   return (
-    <div>      
+    <div className='App'>      
         <Posts />
     </div>
   );

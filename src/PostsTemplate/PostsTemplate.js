@@ -1,18 +1,21 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card'
-import styles from './PostsTemplate.css';
+import { Card } from 'react-bootstrap'
+import { Col, Row, Container } from 'react-bootstrap';
 
 const PostTemplate = (props) => (
-    <div className={styles.wrapper}>
-        <div className={styles.one}>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={props.imgUrl} />
-                <Card.Body>
-                    <Card.Title>{props.title}</Card.Title>
-                </Card.Body>
-            </Card>
-        </div>
-    </div>
+
+    <Container>
+        <Row>
+            <Col xs={6} md={4}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={props.imgUrl} />
+                    <Card.Body>
+                        <Card.Title>{props.title}</Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
+    </Container>
 );
 
 export default PostTemplate;
