@@ -52,6 +52,7 @@
     "react-dom": "^17.0.1",
     "react-infinite-scroll-component": "^5.1.0",
     "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.2",
     "sass-loader": "7.0.1",
