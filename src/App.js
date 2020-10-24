@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter} from 'react-router-dom';
 import Posts from './Posts/Posts'
 
 function App() {
   return (
-    <div className='App'>      
+    <BrowserRouter>
         <Posts />
-    </div>
+    </BrowserRouter>
   );
 }
 
