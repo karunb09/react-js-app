@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Col, Row, ListGroup, Navbar, Form } from 'react-bootstrap';
+import { ListGroup, Navbar, Form } from 'react-bootstrap';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Card } from 'react-bootstrap'
 import { connect } from 'react-redux';
@@ -54,8 +54,8 @@ class Posts extends Component {
         return (
             <div className="Container-fluid">
                 <Navbar bg="dark" variant="dark" className="justify-content-center">
-                    <Form >
-                        <input type="text" placeholder="Search with title..." value={this.state.query} onChange={this.handleInputChange} />
+                    <Form className="form">
+                        <input name = "input" type="text" id="search" placeholder="Search with title..." value={this.state.query} onChange={this.handleInputChange} />
                     </Form>
                 </Navbar>
                 <br />
@@ -71,9 +71,9 @@ class Posts extends Component {
                         endMessage={<p style={{ textAlign: 'center' }}><h2><b>Yay! You have seen it all</b></h2></p>}
                     >
                         <ListGroup variant="flush">
-                            <Row>
+                            <div className="row">
                                 {this.state.filteredPosts.map(post => (
-                                    <Col md={4} key={post.id}>
+                                    <div key={post.id} className="col-md-4">
                                         <ListGroup.Item>
                                             <Card>
                                                 <Card.Img variant="top" src={post.url} />
@@ -82,9 +82,9 @@ class Posts extends Component {
                                                 </Card.Body>
                                             </Card>
                                         </ListGroup.Item>
-                                    </Col>
+                                    </div>
                                 ))}
-                            </Row>
+                            </div>
 
                         </ListGroup>
                     </InfiniteScroll>

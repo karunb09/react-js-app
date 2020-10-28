@@ -1,27 +1,48 @@
-import React from 'react';
+import puppeteer from "puppeteer"; // 1
 
-import { configure, shallow, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+let browser;
+let page;
+jest.setTimeout(900000)
+// 2
+beforeAll(async () => {
+  browser = await puppeteer.launch({
+    headless: false,
+    slowMo: 250
+  });
+  page = await browser.newPage();
+  await page.goto("http://localhost:3000/");
+});
 
-configure({ adapter: new Adapter() });
+// 3
+test("search results should be 4", async () => {
+  await page.waitForSelector(".Container-fluid");
+  await page.type('#search', 'ac');
+  const listItems = await page.$$eval('.col-md-4', col => col.length)
+  expect(listItems).toBe(4);
+});
 
-import sinon from 'sinon';
+test("search results should be 2", async () => {
+  const input = await page.$('#search');
+  await input.click({ clickCount: 3 })
+  await input.type("");
+  await page.waitForSelector(".Container-fluid");
+  await page.type('#search', 'acc');
+  const listItems = await page.$$eval('.col-md-4', col => col.length)
+  expect(listItems).toBe(2);
 
-import { Posts } from './Posts'
-import { Navbar, ListGroup, Form, Input, ListGroupItem, Row,Image} from 'react-bootstrap';
+});
 
-describe('<Posts />', () => {
-    let wrapper;
+test("search results should be 0", async () => {
+  const input = await page.$('#search');
+  await input.click({ clickCount: 3 })
+  await input.type("");
+  await page.waitForSelector(".Container-fluid");
+  await page.type('#search', 'acc1');
+  const listItems = await page.$$eval('.col-md-4', col => col.length)
+  expect(listItems).toBe(0);
+});
 
-    wrapper = shallow(<Posts />);
-
-    it('should find Navbar', () => {
-        expect(wrapper.find(Navbar)).toHaveLength(1);
-    });
-
-
-    it('should find columns in c component', () => {
-        expect(wrapper.find('.col').every('.col')).toEqual(true);
-    });
-
+// 4
+afterAll(() => {
+  browser.close();
 });
